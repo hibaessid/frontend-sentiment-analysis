@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis App</title>
+    <script>
+        async function analyzeSentiment() {
+            const text = document.getElementById("text-input").value;
+            const response = await fetch("http://127.0.0.1:5000/analyze", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ text }),
+            });
+
+            const result = await response.json();
+            document.getElementById("result").innerText = JSON.stringify(result);
+        }
+    </script>
+</head>
+<body>
+    <h1>Sentiment Analysis</h1>
+    <input type="text" id="text-input" placeholder="Enter text">
+    <button onclick="analyzeSentiment()">Analyze</button>
+    <div id="result"></div>
+</body>
+</html>
